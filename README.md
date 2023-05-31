@@ -12,7 +12,7 @@ Find broken links.
 
 ## How to find broken links
 
-You can find broken links at the [command line](https://github.com/annaesvensson/yellow-core). It is quite normal for pages to be renamed, files to be removed and links to no longer work. Don’t worry, it's not hard to find broken links. Open a terminal window. Go to your installation folder, where the file `yellow.php` is. Type `php yellow.php check`, you can optionally add a folder and a location. This will find broken links. Edit the pages shown, fix the broken links and execute the command again.
+You can find broken links at the [command line](https://github.com/annaesvensson/yellow-core). It is quite normal for pages to be renamed, files to be removed and links to no longer work. Don’t worry, it's not hard to find broken links. Open a terminal window. Go to your installation folder, where the file `yellow.php` is. Type `php yellow.php check`, you can optionally add a folder and a location. This will find broken links and show them on screen. Edit the pages shown, fix the broken links and execute the command again.
 
 If you don't want that a page is checked, set `Generate: exclude` in the [page settings](https://github.com/annaesvensson/yellow-core#settings-page) at the top of a page.
 
@@ -29,6 +29,12 @@ Content file with option for generating a static website:
 Finding broken links at the command line:
 
 `php yellow.php check`  
+
+Finding broken links at the command line, different locations:
+
+`php yellow.php check system/temporary /wiki/`  
+`php yellow.php check system/temporary /blog/`  
+`php yellow.php check system/temporary /help/how-to-make-a-small-website`  
 
 ## Acknowledgements
 

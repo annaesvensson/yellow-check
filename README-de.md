@@ -12,7 +12,7 @@ Defekte Links finden.
 
 ## Wie man defekte Links findet
 
-Du kannst defekte Links in der [Befehlszeile](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md) finden. Es ist ganz normal dass Seiten umbenannt werden, Dateien entfernt werden und Links nicht mehr funktionieren. Keine Sorge, es ist nicht schwer defekte Links zu finden. Öffne ein Terminalfenster. Gehe ins Installations-Verzeichnis, dort wo sich die Datei `yellow.php` befindet. Gib ein `php yellow.php check`, du kannst wahlweise ein Verzeichnis und einen Ort angeben. Das findet defekte Links. Bearbeite die angezeigten Seiten, korrigiere die defekten Links und führe den Befehl noch einmal aus.
+Du kannst defekte Links in der [Befehlszeile](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md) finden. Es ist ganz normal dass Seiten umbenannt werden, Dateien entfernt werden und Links nicht mehr funktionieren. Keine Sorge, es ist nicht schwer defekte Links zu finden. Öffne ein Terminalfenster. Gehe ins Installations-Verzeichnis, dort wo sich die Datei `yellow.php` befindet. Gib ein `php yellow.php check`, du kannst wahlweise ein Verzeichnis und einen Ort angeben. Das findet defekte Links und zeigt sie auf dem Bildschirm an. Bearbeite die angezeigten Seiten, korrigiere die defekten Links und führe den Befehl noch einmal aus.
 
 Falls du nicht willst dass eine Seite überprüft wird, kannst du `Generate: exclude` in den [Seiteneinstellungen](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md#einstellungen-seite) ganz oben auf einer Seite festlegen.
 
@@ -29,6 +29,12 @@ Inhaltsdatei mit Option zum Generieren einer statischen Webseite:
 Defekte Links in der Befehlszeile finden:
 
 `php yellow.php check`  
+
+Defekte Links in der Befehlszeile finden, unterschiedliche Orte:
+
+`php yellow.php check system/temporary /wiki/`  
+`php yellow.php check system/temporary /blog/`  
+`php yellow.php check system/temporary /help/how-to-make-a-small-website`  
 
 ## Danksagung
 
