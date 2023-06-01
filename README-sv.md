@@ -12,9 +12,13 @@ Hitta trasiga länkar.
 
 ## Hur man hittar trasiga länkar
 
-Du kan hitta trasiga länkar på [kommandoraden](https://github.com/annaesvensson/yellow-core/tree/main/README-sv.md). Det är ganska normalt att sidor byter namn, filer tas bort och länkar inte längre fungerar. Oroa dig inte, det är inte svårt att hitta trasiga länkar. Öppna ett terminalfönster. Gå till installationsmappen där filen `yellow.php` finns. Skriv `php yellow.php check`, du kan valfritt ange en mapp och en plats. Detta kommer att hitta trasiga länkar och visa dem på skärmen. Redigera sidorna som visas, fixa trasiga länkarna och kör kommandot igen.
+Du kan hitta trasiga länkar på [kommandoraden](https://github.com/annaesvensson/yellow-core/tree/main/README-sv.md). Det är ganska normalt att sidor byter namn, filer tas bort och länkar inte längre fungerar. Oroa dig inte, det är inte svårt att hitta och fixa trasiga länkar. Öppna ett terminalfönster. Gå till installationsmappen där filen `yellow.php` finns. Skriv `php yellow.php check`, du kan valfritt ange en mapp och en plats. Detta kommer att hitta trasiga länkar och visa dem på skärmen.
 
 Om du inte vill att en sida ska granskas, ställ in `Generate: exclude` i [sidinställningar](https://github.com/annaesvensson/yellow-core/tree/main/README-sv.md#inställningar-page) högst upp på en sida.
+
+## Hur man fixar trasiga länkar
+
+När du har hittat trasiga länkar på din webbplats är det dags att fixa dem. Du har två alternativ. Först byt ut trasiga länkar. Försök att hitta den nya platsen eller den nya URL:en. För det andra, ta bort trasiga länkar. Om det inte går att hitta en ersättningslänk finns det inget annat val än att ta bort länken.
 
 ## Exempel
 
