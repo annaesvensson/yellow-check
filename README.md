@@ -12,13 +12,13 @@ Find broken links.
 
 ## How to find broken links
 
-You can find broken links at the [command line](https://github.com/annaesvensson/yellow-core). It is quite normal for pages to be renamed, files to be removed and links to no longer work. Don’t worry, it's not hard to find and fix broken links. Open a terminal window. Go to your installation folder, where the file `yellow.php` is. Type `php yellow.php check`, you can optionally add a folder and a location. This will find broken links and show them on screen.
+You can find broken links at the [command line](https://github.com/annaesvensson/yellow-core). It is quite normal for pages to be renamed, files to be removed and some links to no longer work. Open a terminal window. Go to your installation folder, where the file `yellow.php` is. Type `php yellow.php check`, you can optionally add a folder and a location. This will find broken links on your website and show them on screen.
 
 If you don't want that a page is checked, set `Generate: exclude` in the [page settings](https://github.com/annaesvensson/yellow-core#settings-page) at the top of a page.
 
 ## How to fix broken links
 
-Once you have found broken links on your website, it’s time to fix them. You have two options. First, replace broken links. Try to find the new location or the new URL. Second, remove broken links. If it's not possible to find a replacement link then there is nothing left but to remove the link.
+Once you have found broken links on your website, it’s time to fix them. You have two options. The first option is to replace a broken link. Try to find the new location or the new URL. The second option is to remove a broken link. If it's not possible to find a replacement link then there is nothing left but to remove the link.
 
 ## Examples
 

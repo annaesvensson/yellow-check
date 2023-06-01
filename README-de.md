@@ -12,13 +12,13 @@ Defekte Links finden.
 
 ## Wie man defekte Links findet
 
-Du kannst defekte Links in der [Befehlszeile](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md) finden. Es ist ganz normal dass Seiten umbenannt werden, Dateien entfernt werden und Links nicht mehr funktionieren. Keine Sorge, es ist nicht schwer defekte Links zu finden und zu korrigieren. Öffne ein Terminalfenster. Gehe ins Installations-Verzeichnis, dort wo sich die Datei `yellow.php` befindet. Gib ein `php yellow.php check`, du kannst wahlweise ein Verzeichnis und einen Ort angeben. Das findet defekte Links und zeigt sie auf dem Bildschirm an.
+Du kannst defekte Links in der [Befehlszeile](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md) finden. Es ist ganz normal dass Seiten umbenannt werden, Dateien entfernt werden und manche Links nicht mehr funktionieren. Öffne ein Terminalfenster. Gehe ins Installations-Verzeichnis, dort wo sich die Datei `yellow.php` befindet. Gib ein `php yellow.php check`, du kannst wahlweise ein Verzeichnis und einen Ort angeben. Das findet defekte Links auf deiner Webseite und zeigt sie auf dem Bildschirm an.
 
 Falls du nicht willst dass eine Seite überprüft wird, kannst du `Generate: exclude` in den [Seiteneinstellungen](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md#einstellungen-seite) ganz oben auf einer Seite festlegen.
 
 ## Wie man defekte Links korrigiert
 
-Sobald du defekte Links auf deiner Webseite gefunden hast ist es an der Zeit sie zu beheben. Du hast zwei Möglichkeiten. Erstens ersetze defekte Links. Versuche den neuen Ort oder die neue URL zu finden. Zweitens entferne defekte Links. Sollte es nicht möglich sein einen Ersatz-Link zu finden, bleibt nichts anderes übrig als den Links zu entfernen.
+Sobald du defekte Links auf deiner Webseite gefunden hast ist es an der Zeit sie zu beheben. Du hast zwei Möglichkeiten. Die erste Möglichkeit besteht darin, einen defekten Link zu ersetzen. Versuche den neuen Ort oder die neue URL zu finden. Die zweite Möglichkeit besteht darin, einen defekten Links zu entfernen. Sollte es nicht möglich sein einen Ersatz-Link zu finden, bleibt nichts anderes übrig als den Links zu entfernen.
 
 ## Beispiele
 
