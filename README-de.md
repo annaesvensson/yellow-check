@@ -1,6 +1,6 @@
 <p align="right"><a href="README-de.md">Deutsch</a> &nbsp; <a href="README.md">English</a> &nbsp; <a href="README-sv.md">Svenska</a></p>
 
-# Check 0.8.1
+# Check 0.8.2
 
 Defekte Links finden.
 
@@ -18,7 +18,7 @@ Falls du nicht willst dass eine Seite überprüft wird, kannst du `Generate: exc
 
 ## Wie man defekte Links korrigiert
 
-Sobald du defekte Links auf deiner Webseite gefunden hast ist es an der Zeit sie zu beheben. Du hast zwei Möglichkeiten. Die erste Möglichkeit besteht darin, einen defekten Link zu ersetzen. Versuche den neuen Ort oder die neue URL zu finden. Die zweite Möglichkeit besteht darin, einen defekten Links zu entfernen. Sollte es nicht möglich sein einen Ersatz-Link zu finden, bleibt nichts anderes übrig als den Links zu entfernen.
+Sobald du defekte Links auf deiner Webseite gefunden hast ist es an der Zeit sie zu beheben. Du hast zwei Möglichkeiten. Die erste Möglichkeit besteht darin, einen defekten Link zu ersetzen. Versuche den neuen Ort oder die neue URL zu finden. Die zweite Möglichkeit besteht darin, einen defekten Links zu entfernen. Sollte es nicht möglich sein einen Ersatz-Link zu finden, bleibt nichts anderes übrig als den Link zu entfernen.
 
 ## Beispiele
 
@@ -36,9 +36,9 @@ Defekte Links in der Befehlszeile finden:
 
 Defekte Links in der Befehlszeile finden, unterschiedliche Orte:
 
-`php yellow.php check system/temporary /wiki/`  
-`php yellow.php check system/temporary /blog/`  
-`php yellow.php check system/temporary /help/how-to-make-a-small-website`  
+`php yellow.php check public /wiki/`  
+`php yellow.php check public /blog/`  
+`php yellow.php check public /help/how-to-make-a-small-website`  
 
 ## Danksagung
 

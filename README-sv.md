@@ -1,6 +1,6 @@
 <p align="right"><a href="README-de.md">Deutsch</a> &nbsp; <a href="README.md">English</a> &nbsp; <a href="README-sv.md">Svenska</a></p>
 
-# Check 0.8.1
+# Check 0.8.2
 
 Hitta trasiga länkar.
 
@@ -36,9 +36,9 @@ Hitta trasiga länkar på kommandoraden:
 
 Hitta trasiga länkar på kommandoraden, olika platser:
 
-`php yellow.php check system/temporary /wiki/`  
-`php yellow.php check system/temporary /blog/`  
-`php yellow.php check system/temporary /help/how-to-make-a-small-website`  
+`php yellow.php check public /wiki/`  
+`php yellow.php check public /blog/`  
+`php yellow.php check public /help/how-to-make-a-small-website`  
 
 ## Tack
 

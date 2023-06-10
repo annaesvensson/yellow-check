@@ -2,10 +2,11 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "0.8.1";
-    public $yellow;                       // access to API
-    public $links;                        // number of links
-    public $errors;                       // number of errors
+    const VERSION = "0.8.2";
+    public $yellow;     // access to API
+    public $links;      // number of total links
+    public $broken;     // number of broken/redirected links
+    public $errors;     // number of errors
 
     // Handle initialisation
     public function onLoad($yellow) {
@@ -26,21 +27,27 @@ class YellowCheck {
         return "check [directory location]";
     }
 
-    // Process command to check static files for broken links
+    // Process command to find broken links
     public function processCommandCheck($command, $text) {
         $statusCode = 0;
         list($path, $location) = $this->yellow->toolbox->getTextArguments($text);
         if (is_string_empty($location) || substru($location, 0, 1)=="/") {
             if ($this->checkStaticSettings()) {
-                $statusCode = $this->checkStaticFiles($path, $location);
+                $statusCode = $this->checkFiles($path, $location);
             } else {
                 $statusCode = 500;
                 $this->links = 0;
+                $this->broken = 0;
                 $this->errors = 1;
-                $fileName = $this->yellow->system->get("coreExtensionDirectory").$this->yellow->system->get("coreSystemFile");
-                echo "ERROR checking files: Please configure GenerateStaticUrl in file '$fileName'!\n";
+                if (!$this->yellow->extension->isExisting("generate")) {
+                    echo "ERROR checking files: This extension requires the 'generate' extension!\n";
+                } else {
+                    $fileName = $this->yellow->system->get("coreExtensionDirectory").$this->yellow->system->get("coreSystemFile");
+                    echo "ERROR checking files: Please configure GenerateStaticUrl in file '$fileName'!\n";
+                }
             }
             echo "Yellow $command: $this->links link".($this->links!=1 ? "s" : "");
+            echo ", $this->broken broken";
             echo ", $this->errors error".($this->errors!=1 ? "s" : "")."\n";
         } else {
             $statusCode = 400;
@@ -49,23 +56,46 @@ class YellowCheck {
         return $statusCode;
     }
     
-    // Check static files for broken links
-    public function checkStaticFiles($path, $locationFilter) {
+    // Check and show broken links
+    public function checkFiles($path, $location) {
+        $this->links = $this->broken = $this->errors = 0;
         $path = rtrim(is_string_empty($path) ? $this->yellow->system->get("generateStaticDirectory") : $path, "/");
-        $this->links = $this->errors = 0;
-        $regex = "/^[^.]+$|".$this->yellow->system->get("generateStaticDefaultFile")."$/";
-        $fileNames = $this->yellow->toolbox->getDirectoryEntriesRecursive($path, $regex, false, false);
-        list($statusCodeFiles, $links) = $this->analyseLinks($path, $locationFilter, $fileNames);
-        list($statusCodeLinks, $broken, $redirect) = $this->analyseStatus($path, $links);
+        list($statusCodeGenerate, $fileNames) = $this->generateFiles($path, $location);
+        list($statusCodeAnalyse, $links) = $this->analyseFiles($path, $location, $fileNames);
+        list($statusCodeLinks, $broken, $redirected) = $this->analyseLinks($path, $links);
+        $statusCodeClean = $this->cleanFiles($path, $location);
         if ($statusCodeLinks!=200) {
             $this->showLinks($broken, "Broken links");
-            $this->showLinks($redirect, "Redirect links");
+            $this->showLinks($redirected, "Redirected links");
         }
-        return max($statusCodeFiles, $statusCodeLinks);
+        return max($statusCodeGenerate, $statusCodeAnalyse, $statusCodeLinks, $statusCodeClean);
     }
     
-    // Analyse links in static files
-    public function analyseLinks($path, $locationFilter, $fileNames) {
+    // Generate files
+    public function generateFiles($path, $location) {
+        $statusCode = 200;
+        if ($this->yellow->extension->isExisting("generate")) {
+            $this->yellow->extension->get("generate")->errors = 0;
+            $path = rtrim(is_string_empty($path) ? $this->yellow->system->get("generateStaticDirectory") : $path, "/");
+            if (is_string_empty($location)) {
+                $statusCode = $this->yellow->extension->get("generate")->cleanStatic($path, $location);
+                foreach ($this->yellow->extension->data as $key=>$value) {
+                    if (method_exists($value["object"], "onUpdate")) $value["object"]->onUpdate("clean");
+                }
+            }
+            $statusCode = max($statusCode, $this->yellow->extension->get("generate")->generateStaticContent(
+                $path, $location, "\rFinding broken links", 5, 45));
+            $statusCode = max($statusCode, $this->yellow->extension->get("generate")->generateStaticMedia(
+                $path, $location));
+            $this->errors += $this->yellow->extension->get("generate")->errors;
+        }
+        $regex = "/^[^.]+$|".$this->yellow->system->get("generateStaticDefaultFile")."$/";
+        $fileNames = $this->yellow->toolbox->getDirectoryEntriesRecursive($path, $regex, false, false);
+        return array($statusCode, $fileNames);
+    }
+    
+    // Analyse files
+    public function analyseFiles($path, $locationFilter, $fileNames) {
         $statusCode = 200;
         $links = array();
         if (!is_array_empty($fileNames)) {
@@ -88,7 +118,7 @@ class YellowCheck {
                                 $links[$url] .= ",".$locationSource;
                             }
                             if ($this->yellow->system->get("coreDebugMode")>=2) {
-                                echo "YellowCheck::analyseLinks detected url:$url<br/>\n";
+                                echo "YellowCheck::analyseFiles detected url:$url<br/>\n";
                             }
                         } elseif (substru($location, 0, 1)=="/") {
                             $url = "$scheme://$address$location";
@@ -98,12 +128,12 @@ class YellowCheck {
                                 $links[$url] .= ",".$locationSource;
                             }
                             if ($this->yellow->system->get("coreDebugMode")>=2) {
-                                echo "YellowCheck::analyseLinks detected url:$url<br/>\n";
+                                echo "YellowCheck::analyseFiles detected url:$url<br/>\n";
                             }
                         }
                     }
                     if ($this->yellow->system->get("coreDebugMode")>=1) {
-                        echo "YellowCheck::analyseLinks location:$locationSource<br/>\n";
+                        echo "YellowCheck::analyseFiles location:$locationSource<br/>\n";
                     }
                 } else {
                     $statusCode = 500;
@@ -120,10 +150,10 @@ class YellowCheck {
         return array($statusCode, $links);
     }
     
-    // Analyse link status
-    public function analyseStatus($path, $links) {
+    // Analyse links
+    public function analyseLinks($path, $links) {
         $statusCode = 200;
-        $remote = $broken = $redirect = $data = array();
+        $remote = $broken = $redirected = $data = array();
         $staticUrl = $this->yellow->system->get("generateStaticUrl");
         $staticUrlLength = strlenu(rtrim($staticUrl, "/"));
         list($scheme, $address, $base) = $this->yellow->lookup->getUrlInformation($staticUrl);
@@ -137,11 +167,12 @@ class YellowCheck {
             }
             if (preg_match("/^(http|https):/", $url)) $remote[$url] = $value;
         }
-        $remoteNow = 0;
+        $remoteNow = count($remote);
+        $remoteTotal = $remoteNow*2;
         uksort($remote, "strnatcasecmp");
         foreach ($remote as $url=>$value) {
-            echo "\rChecking static website ".$this->getProgressPercent(++$remoteNow, count($remote), 5, 95)."%... ";
-            if ($this->yellow->system->get("coreDebugMode")>=1) echo "YellowCheck::analyseStatus url:$url\n";
+            echo "\rFinding broken links ".$this->getProgressPercent(++$remoteNow, $remoteTotal, 5, 95)."%... ";
+            if ($this->yellow->system->get("coreDebugMode")>=1) echo "YellowCheck::analyseLinks url:$url\n";
             $referer = "$scheme://$address$base".(($pos = strposu($value, ",")) ? substru($value, 0, $pos) : $value);
             $statusCodeUrl = $this->getLinkStatus($url, $referer);
             if ($statusCodeUrl!=200) {
@@ -155,15 +186,17 @@ class YellowCheck {
             foreach ($locations as $location) {
                 if ($statusCodeUrl==302) continue;
                 if ($statusCodeUrl>=300 && $statusCodeUrl<=399) {
-                    $redirect["$scheme://$address$base$location -> $url - ".$this->getStatusFormatted($statusCodeUrl)] = $statusCodeUrl;
+                    $redirected["$scheme://$address$base$location -> $url - ".
+                        $this->getStatusFormatted($statusCodeUrl)] = $statusCodeUrl;
                 } else {
-                    $broken["$scheme://$address$base$location -> $url - ".$this->getStatusFormatted($statusCodeUrl)] = $statusCodeUrl;
+                    $broken["$scheme://$address$base$location -> $url - ".
+                        $this->getStatusFormatted($statusCodeUrl)] = $statusCodeUrl;
+                    ++$this->broken;
                 }
-                ++$this->errors;
             }
         }
-        echo "\rChecking static website 100%... done\n";
-        return array($statusCode, $broken, $redirect);
+        echo "\rFinding broken links 100%... done\n";
+        return array($statusCode, $broken, $redirected);
     }
 
     // Show links
@@ -177,6 +210,15 @@ class YellowCheck {
             }
             echo "\n";
         }
+    }
+    
+    // Clean files and directories
+    public function cleanFiles($path, $location) {
+        $statusCode = 0;
+        if ($this->yellow->extension->isExisting("generate")) {
+            $statusCode = $this->yellow->extension->get("generate")->cleanStatic($path, $location);
+        }
+        return $statusCode;
     }
     
     // Check static settings
@@ -210,6 +252,7 @@ class YellowCheck {
     
     // Return progress in percent
     public function getProgressPercent($now, $total, $increments, $max) {
+        $max = intval($max/$increments) * $increments;
         $percent = intval(($max/$total) * $now);
         if ($increments>1) $percent = intval($percent/$increments) * $increments;
         return min($max, $percent);
