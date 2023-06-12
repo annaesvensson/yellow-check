@@ -5,7 +5,7 @@ class YellowCheck {
     const VERSION = "0.8.2";
     public $yellow;     // access to API
     public $links;      // number of total links
-    public $broken;     // number of broken/redirected links
+    public $broken;     // number of broken links
     public $errors;     // number of errors
 
     // Handle initialisation
