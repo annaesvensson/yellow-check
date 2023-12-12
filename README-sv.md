@@ -4,7 +4,7 @@
 
 Hitta trasiga länkar.
 
-<p align="center"><img src="SCREENSHOT.png?raw=true" alt="Skärmdump"></p>
+<p align="center"><img src="SCREENSHOT.png" alt="Skärmdump"></p>
 
 ## Hur man installerar ett tillägg
 
