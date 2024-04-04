@@ -2,7 +2,7 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "0.8.2";
+    const VERSION = "0.9.1";
     public $yellow;     // access to API
     public $links;      // number of total links
     public $broken;     // number of broken links
