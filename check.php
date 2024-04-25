@@ -2,7 +2,7 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "0.9.4";
+    const VERSION = "0.9.5";
     public $yellow;     // access to API
     public $links;      // number of total links
     public $broken;     // number of broken links
@@ -87,6 +87,8 @@ class YellowCheck {
                 $path, $location, "\rFinding broken links", 5, 45));
             $statusCode = max($statusCode, $this->yellow->extension->get("generate")->generateStaticMedia(
                 $path, $location));
+            $statusCode = max($statusCode, $this->yellow->extension->get("generate")->generateStaticSystem(
+                $path, $location));
             $this->errors += $this->yellow->extension->get("generate")->errors;
         }
         $regex = "/^[^.]+$|".$this->yellow->system->get("generateStaticDefaultFile")."$/";
@@ -132,7 +134,7 @@ class YellowCheck {
                             }
                         }
                     }
-                    if ($this->yellow->system->get("coreDebugMode")>=1) {
+                    if ($this->yellow->system->get("coreDebugMode")>=2) {
                         echo "YellowCheck::analyseFiles location:$locationSource<br/>\n";
                     }
                 } else {
@@ -165,14 +167,16 @@ class YellowCheck {
                 if (is_readable($fileName)) continue;
                 if (in_array($location, $availableLocations)) continue;
             }
-            if (preg_match("/^(http|https):/", $url)) $remote[$url] = $value;
+            if (preg_match("/^(http|https):/", $url)) {
+                $remote[$url] = $value;
+                if ($this->yellow->system->get("coreDebugMode")>=2) echo "YellowCheck::analyseLinks remote url:$url<br/>\n";
+            }
         }
         $remoteNow = count($remote);
         $remoteTotal = $remoteNow*2;
         uksort($remote, "strnatcasecmp");
         foreach ($remote as $url=>$value) {
             echo "\rFinding broken links ".$this->getProgressPercent(++$remoteNow, $remoteTotal, 5, 95)."%... ";
-            if ($this->yellow->system->get("coreDebugMode")>=1) echo "YellowCheck::analyseLinks url:$url\n";
             $referer = "$scheme://$address$base".(($pos = strposu($value, ",")) ? substru($value, 0, $pos) : $value);
             $statusCodeUrl = $this->getLinkStatus($url, $referer);
             if ($statusCodeUrl!=200) {
