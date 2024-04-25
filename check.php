@@ -2,7 +2,7 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "0.9.1";
+    const VERSION = "0.9.4";
     public $yellow;     // access to API
     public $links;      // number of total links
     public $broken;     // number of broken links
@@ -157,13 +157,13 @@ class YellowCheck {
         $staticUrl = $this->yellow->system->get("generateStaticUrl");
         $staticUrlLength = strlenu(rtrim($staticUrl, "/"));
         list($scheme, $address, $base) = $this->yellow->lookup->getUrlInformation($staticUrl);
-        $staticLocations = $this->getContentLocations(true);
+        $availableLocations = $this->getAvailableLocations();
         foreach ($links as $url=>$value) {
             if (preg_match("#^$staticUrl#", $url)) {
                 $location = substru($url, $staticUrlLength);
                 $fileName = $path.substru($url, $staticUrlLength);
                 if (is_readable($fileName)) continue;
-                if (in_array($location, $staticLocations)) continue;
+                if (in_array($location, $availableLocations)) continue;
             }
             if (preg_match("/^(http|https):/", $url)) $remote[$url] = $value;
         }
@@ -226,15 +226,6 @@ class YellowCheck {
         return preg_match("/^(http|https):/", $this->yellow->system->get("generateStaticUrl"));
     }
     
-    // Return content locations
-    public function getContentLocations($includeAll = false) {
-        $locations = array();
-        if ($this->yellow->extension->isExisting("generate")) {
-            $locations = $this->yellow->extension->get("generate")->getContentLocations($includeAll);
-        }
-        return $locations;
-    }
-
     // Return static location
     public function getStaticLocation($path, $fileName) {
         $location = substru($fileName, strlenu($path));
@@ -245,6 +236,19 @@ class YellowCheck {
         return $location;
     }
     
+    // Return available locations
+    public function getAvailableLocations() {
+        $locations = array();
+        $staticUrl = $this->yellow->system->get("generateStaticUrl");
+        list($scheme, $address, $base) = $this->yellow->lookup->getUrlInformation($staticUrl);
+        $this->yellow->page->setRequestInformation($scheme, $address, $base, "", "", false);
+        foreach ($this->yellow->content->getChildrenRecursive("", true) as $page) {
+            array_push($locations, $page->location);
+        }
+        if (!$this->yellow->content->find("/") && $this->yellow->system->get("coreMultiLanguageMode")) array_unshift($locations, "/");
+        return $locations;
+    }
+
     // Return human readable status
     public function getStatusFormatted($statusCode) {
         return $this->yellow->toolbox->getHttpStatusFormatted($statusCode, true);
