@@ -18,7 +18,7 @@ Om du inte vill att en sida ska granskas, ställ in `Generate: exclude` i [sidin
 
 ## Hur man fixar trasiga länkar
 
-När du har hittat trasiga länkar på din webbplats är det dags att fixa dem. Du har två alternativ. Det första alternativet är att byta ut en trasig länk. Försök att hitta den nya platsen eller den nya URL:en. Det andra alternativet är att ta bort en trasig länk. Om det inte går att hitta en ersättningslänk finns det inget annat val än att ta bort länken.
+När du har hittat trasiga länkar på din webbplats är det dags att fixa dem. Du har två alternativ. Det första alternativet är att byta ut en trasig länk. Försök att hitta den nya platsen eller den nya URL:en. Det andra alternativet är att ta bort en trasig länk. Om det inte går att hitta en ersättningslänk finns det inget annat val än att ta bort föråldrade länken.
 
 ## Exempel
 

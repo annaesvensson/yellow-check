@@ -18,7 +18,7 @@ Falls du nicht willst dass eine Seite überprüft wird, kannst du `Generate: exc
 
 ## Wie man defekte Links korrigiert
 
-Sobald du defekte Links auf deiner Webseite gefunden hast ist es an der Zeit sie zu beheben. Du hast zwei Möglichkeiten. Die erste Möglichkeit besteht darin, einen defekten Link zu ersetzen. Versuche den neuen Ort oder die neue URL zu finden. Die zweite Möglichkeit besteht darin, einen defekten Links zu entfernen. Sollte es nicht möglich sein einen Ersatz-Link zu finden, bleibt nichts anderes übrig als den Link zu entfernen.
+Sobald du defekte Links auf deiner Webseite gefunden hast ist es an der Zeit sie zu beheben. Du hast zwei Möglichkeiten. Die erste Möglichkeit besteht darin, einen defekten Link zu ersetzen. Versuche den neuen Ort oder die neue URL zu finden. Die zweite Möglichkeit besteht darin, einen defekten Link zu entfernen. Sollte es nicht möglich sein einen Ersatz-Link zu finden, bleibt nichts anderes übrig als den veralteten Link zu entfernen.
 
 ## Beispiele
 

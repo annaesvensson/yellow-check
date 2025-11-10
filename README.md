@@ -18,7 +18,7 @@ If you don't want that a page is checked, set `Generate: exclude` in the [page s
 
 ## How to fix broken links
 
-Once you have found broken links on your website, it’s time to fix them. You have two options. The first option is to replace a broken link. Try to find the new location or the new URL. The second option is to remove a broken link. If it's not possible to find a replacement link then there is nothing left but to remove the link.
+Once you have found broken links on your website, it’s time to fix them. You have two options. The first option is to replace a broken link. Try to find the new location or the new URL. The second option is to remove a broken link. If it's not possible to find a replacement link then there is nothing left but to remove the obsolete link.
 
 ## Examples
 
