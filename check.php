@@ -2,7 +2,7 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "0.9.5";
+    const VERSION = "0.9.6";
     public $yellow;     // access to API
     public $links;      // number of total links
     public $broken;     // number of broken links
@@ -277,7 +277,7 @@ class YellowCheck {
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, false);
         curl_exec($curlHandle);
         $statusCode = curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
-        curl_close($curlHandle);
+        if (PHP_VERSION_ID<80000) curl_close($curlHandle);
         if ($statusCode<200) $statusCode = 404;
         if ($this->yellow->system->get("coreDebugMode")>=2) {
             echo "YellowCheck::getLinkStatus status:$statusCode url:$url<br/>\n";
