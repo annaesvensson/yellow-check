@@ -1,20 +1,20 @@
-<p align="right"><a href="README-de.md">Deutsch</a> &nbsp; <a href="README.md">English</a> &nbsp; <a href="README-sv.md">Svenska</a></p>
+<p align="right"><a href="readme-de.md">Deutsch</a> &nbsp; <a href="readme.md">English</a> &nbsp; <a href="readme-sv.md">Svenska</a></p>
 
 # Check 0.9.6
 
 Defekte Links finden.
 
-<p align="center"><img src="SCREENSHOT.png" alt="Bildschirmfoto"></p>
+<p align="center"><img src="screenshot.png" alt="Bildschirmfoto"></p>
 
 ## Wie man eine Erweiterung installiert
 
-[ZIP-Datei herunterladen](https://github.com/annaesvensson/yellow-check/archive/refs/heads/main.zip) und in dein `system/extensions`-Verzeichnis kopieren. [Weitere Informationen zu Erweiterungen](https://github.com/annaesvensson/yellow-update/tree/main/README-de.md).
+[ZIP-Datei herunterladen](https://github.com/annaesvensson/yellow-check/archive/refs/heads/main.zip) und in dein `system/extensions`-Verzeichnis kopieren. [Weitere Informationen zu Erweiterungen](https://github.com/annaesvensson/yellow-update/tree/main/readme-de.md).
 
 ## Wie man defekte Links findet
 
-Du kannst defekte Links in der [Befehlszeile](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md) finden. Es ist ganz normal dass Seiten umbenannt werden, Dateien entfernt werden und manche Links nicht mehr funktionieren. Öffne ein Terminalfenster. Gehe ins Installations-Verzeichnis, dort wo sich die Datei `yellow.php` befindet. Gib ein `php yellow.php check`, du kannst wahlweise ein Verzeichnis und einen Ort angeben. Das findet defekte Links auf deiner Webseite und zeigt sie auf dem Bildschirm an.
+Du kannst defekte Links in der [Befehlszeile](https://github.com/annaesvensson/yellow-core/tree/main/readme-de.md) finden. Es ist ganz normal dass Seiten umbenannt werden, Dateien entfernt werden und manche Links nicht mehr funktionieren. Öffne ein Terminalfenster. Gehe ins Installations-Verzeichnis, dort wo sich die Datei `yellow.php` befindet. Gib ein `php yellow.php check`, du kannst wahlweise ein Verzeichnis und einen Ort angeben. Das findet defekte Links auf deiner Webseite und zeigt sie auf dem Bildschirm an.
 
-Falls du nicht willst dass eine Seite überprüft wird, kannst du `Generate: exclude` in den [Seiteneinstellungen](https://github.com/annaesvensson/yellow-core/tree/main/README-de.md#einstellungen-seite) ganz oben auf einer Seite festlegen.
+Falls du nicht willst dass eine Seite überprüft wird, kannst du `Generate: exclude` in den [Seiteneinstellungen](https://github.com/annaesvensson/yellow-core/tree/main/readme-de.md#einstellungen-seite) ganz oben auf einer Seite festlegen.
 
 ## Wie man defekte Links korrigiert
 
