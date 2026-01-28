@@ -1,8 +1,6 @@
-<p align="right"><a href="readme-de.md">Deutsch</a> &nbsp; <a href="readme.md">English</a> &nbsp; <a href="readme-sv.md">Svenska</a></p>
-
 # Check 0.9.6
 
-Find broken links.
+Find broken links. Developed by Anna Svensson.
 
 <p align="center"><img src="screenshot.png" alt="Screenshot"></p>
 
@@ -44,6 +42,4 @@ Finding broken links at the command line, different locations:
 
 This extension uses [curl](https://github.com/curl/curl) by Daniel Stenberg. Thank you for the useful library.
 
-## Developer
-
-Anna Svensson. [Get help](https://datenstrom.se/yellow/help/).
+Do you have questions? [Get help](https://datenstrom.se/yellow/help/).
