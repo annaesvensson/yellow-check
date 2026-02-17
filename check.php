@@ -2,7 +2,7 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "0.9.6";
+    const VERSION = "0.9.7";
     public $yellow;     // access to API
     public $links;      // number of total links
     public $broken;     // number of broken links
@@ -120,7 +120,7 @@ class YellowCheck {
                                 $links[$url] .= ",".$locationSource;
                             }
                             if ($this->yellow->system->get("coreDebugMode")>=2) {
-                                echo "YellowCheck::analyseFiles detected url:$url<br/>\n";
+                                echo "YellowCheck::analyseFiles detected url:$url<br />\n";
                             }
                         } elseif (substru($location, 0, 1)=="/") {
                             $url = "$scheme://$address$location";
@@ -130,12 +130,12 @@ class YellowCheck {
                                 $links[$url] .= ",".$locationSource;
                             }
                             if ($this->yellow->system->get("coreDebugMode")>=2) {
-                                echo "YellowCheck::analyseFiles detected url:$url<br/>\n";
+                                echo "YellowCheck::analyseFiles detected url:$url<br />\n";
                             }
                         }
                     }
                     if ($this->yellow->system->get("coreDebugMode")>=2) {
-                        echo "YellowCheck::analyseFiles location:$locationSource<br/>\n";
+                        echo "YellowCheck::analyseFiles location:$locationSource<br />\n";
                     }
                 } else {
                     $statusCode = 500;
@@ -169,7 +169,7 @@ class YellowCheck {
             }
             if (preg_match("/^(http|https):/", $url)) {
                 $remote[$url] = $value;
-                if ($this->yellow->system->get("coreDebugMode")>=2) echo "YellowCheck::analyseLinks remote url:$url<br/>\n";
+                if ($this->yellow->system->get("coreDebugMode")>=2) echo "YellowCheck::analyseLinks remote url:$url<br />\n";
             }
         }
         $remoteNow = count($remote);
@@ -280,7 +280,7 @@ class YellowCheck {
         if (PHP_VERSION_ID<80000) curl_close($curlHandle);
         if ($statusCode<200) $statusCode = 404;
         if ($this->yellow->system->get("coreDebugMode")>=2) {
-            echo "YellowCheck::getLinkStatus status:$statusCode url:$url<br/>\n";
+            echo "YellowCheck::getLinkStatus status:$statusCode url:$url<br />\n";
         }
         return $statusCode;
     }

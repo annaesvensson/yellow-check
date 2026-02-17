@@ -1,4 +1,4 @@
-# Check 0.9.6
+# Check 0.9.7
 
 Find broken links. Developed by Anna Svensson.
 

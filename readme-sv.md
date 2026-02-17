@@ -1,4 +1,4 @@
-# Check 0.9.6
+# Check 0.9.7
 
 Hitta trasiga länkar. Utvecklad av Anna Svensson.
 
