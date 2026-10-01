@@ -2,7 +2,7 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "1.0.1";
+    const VERSION = "1.0.2";
     public $yellow;     // access to API
     public $links;      // number of total links
     public $broken;     // number of broken links
@@ -89,6 +89,13 @@ class YellowCheck {
                 $path, $location));
             $statusCode = max($statusCode, $this->yellow->extension->get("generate")->generateStaticSystem(
                 $path, $location));
+            foreach ($this->yellow->extension->data as $key=>$value) {
+                if (method_exists($value["object"], "onGenerate")) {
+                    $statusCodeExtension = $value["object"]->onGenerate("check", $path, $location);
+                    if ($statusCodeExtension>=400) ++$this->errors;
+                    $statusCode = max($statusCode, $statusCodeExtension);
+                }
+            }
             $this->errors += $this->yellow->extension->get("generate")->errors;
         }
         $regex = "/^[^.]+$|".$this->yellow->system->get("generateStaticDefaultFile")."$/";

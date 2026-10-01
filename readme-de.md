@@ -1,4 +1,4 @@
-# Check 1.0.1
+# Check 1.0.2
 
 Defekte Links finden. Entwickelt von Anna Svensson.
 
