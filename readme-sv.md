@@ -1,4 +1,4 @@
-# Check 1.0.2
+# Check 1.0.3
 
 Hitta trasiga länkar. Utvecklad av Anna Svensson.
 

@@ -2,7 +2,7 @@
 // Check extension, https://github.com/annaesvensson/yellow-check
 
 class YellowCheck {
-    const VERSION = "1.0.2";
+    const VERSION = "1.0.3";
     public $yellow;     // access to API
     public $links;      // number of total links
     public $broken;     // number of broken links
@@ -147,7 +147,7 @@ class YellowCheck {
                 } else {
                     $statusCode = 500;
                     ++$this->errors;
-                    echo "ERROR reading files: Can't read file '$fileName'!\n";
+                    echo "ERROR reading files: Can't read file '$fileName', permission denied!\n";
                 }
             }
             $this->links = count($links);
